@@ -1,0 +1,67 @@
+while True:
+    try:
+        a = list(map(int, input('введите последовательность чисел через пробел:').split()))
+        if a != list(map(int, input().split())):
+            break
+        else:
+            raise ValueError
+    except ValueError:
+        print('Не выполнено условие ввода')
+    pass
+
+while True:
+    try:
+        el = int(input("Введите целое число: "))
+        if type(el) == int:
+            break
+        else:
+            raise ValueError
+    except ValueError:
+        print('Не выполнено условие ввода')
+    pass
+
+def sort(arr):
+    for i in range(len(arr)):
+        for j in range(len(arr)-i-1):
+            if arr[j] > arr[j+1]:
+                arr[j], arr[j+1] = arr[j+1], arr[j]
+    return arr
+
+
+def binary_search(array, element, left, right):
+    if left > right:
+        return False
+
+    middle = (right + left) // 2
+    if array[middle] == element:
+        return middle
+    elif element < array[middle]:
+        return binary_search(array, element, left, middle - 1)
+    else:
+        return binary_search(array, element, middle + 1, right)
+
+sorted_list = sort(a)
+print(sorted_list)
+if el < min(a):
+    left = "слева нет чисел"
+    right = 0
+elif el > max(a):
+    left = a.index(max(a))
+    right = "справа нет чисел "
+else:
+    n = min(a, key=lambda x: abs(x - el))
+    if n == el:
+        right = a.index(n)
+        a1 = a[:right]
+        left = a.index(min(a1, key=lambda x: abs(x - el)))
+    if n > el:
+        right = a.index(n)
+        a1 = a[:right]
+        left = a.index(min(a1, key=lambda x: abs(x - el)))
+    if n < el:
+        left = a.index(min(a, key=lambda x: abs(x - el)))
+        a1 = a[left + 1:]
+        right = a.index(min(a1, key=lambda x: abs(x - el)))
+
+print("Индекс ближайщего слева чила: ", left)
+print("Индекс ближайшего справа числа: ", right)
